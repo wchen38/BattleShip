@@ -35,6 +35,9 @@ public class Board {
     }
 
     public Boolean addShip(int row, int col, int len, boolean horizontal) {
+        if (len <= 0) {
+            return false;
+        }
         if (horizontal) {
             int end = col + len;
             // check for out of bound
@@ -52,20 +55,20 @@ public class Board {
                 board[row][i] = "b";
             }
         } else {
-            int end = col + len;
+            int end = row + len;
             // check for out of bound
             if (end > SIZE) {
                 return false;
             }
             
             // check for intersection
-            for (int i = col; i < end; i++) {
+            for (int i = row; i < end; i++) {
                 if (!board[i][col].equals("-")) {
                     return false;
                 }
             }
             
-            for (int i = col; i < end; i++) {
+            for (int i = row; i < end; i++) {
                 board[i][col] = "b";
             }
         }
