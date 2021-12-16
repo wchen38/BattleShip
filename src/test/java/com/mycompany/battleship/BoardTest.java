@@ -108,4 +108,53 @@ public class BoardTest {
         Boolean res = bs.addShip(10, 9, 1, false);
         assertEquals("test vertical out of bound placement", res, false);
     }
+    
+    @org.junit.Test
+    public void foundShip1() {
+        Board bs = new Board();
+        bs.addShip(0, 1, 2, true);
+        boolean res = bs.foundShip(2);
+        assertEquals("test found horizontal ship", res, true);
+    }
+    
+    @org.junit.Test
+    public void foundShip2() {
+        Board bs = new Board();
+        bs.addShip(0, 1, 2, true);
+        boolean res = bs.foundShip(5);
+        assertEquals("test no match", res, false);
+    }
+
+    @org.junit.Test
+    public void foundShip3() {
+        Board bs = new Board();
+        bs.addShip(5, 5, 4, false);
+        boolean res = bs.foundShip(4);
+        assertEquals("test found vertical ship", res, true);
+    }
+    
+    @org.junit.Test
+    public void shoot1() {
+        Board bs = new Board();
+        bs.addShip(5, 5, 4, false);
+        int res = bs.shoot(5, 5);
+        assertEquals("hit ship", res, 1);
+    }
+    
+    @org.junit.Test
+    public void shoot2() {
+        Board bs = new Board();
+        bs.addShip(5, 5, 4, false);
+        int res = bs.shoot(5, 6);
+        assertEquals("miss ship", res, 0);
+    }
+    
+    @org.junit.Test
+    public void shoot3() {
+        Board bs = new Board();
+        bs.addShip(5, 5, 4, false);
+        bs.shoot(5, 5);
+        int res = bs.shoot(5, 5);
+        assertEquals("miss ship", res, 2);
+    }
 }

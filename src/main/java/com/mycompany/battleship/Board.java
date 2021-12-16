@@ -75,5 +75,63 @@ public class Board {
         
         return true;
     }
+    
+    public boolean foundShip(int len) {
+        int foundShipLen = 0;
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col ++) {
+                if ((col + len) >= SIZE) {
+                    break;
+                }
+                
+                if ((row + len) >= SIZE) {
+                    break;
+                }
+                
+                // check horizontal ships
+                for (int i = 0; i < len; i++) {
+                    if (board[row][col+i] == "b") {
+                        foundShipLen++;
+                    }
+                }
+                if (foundShipLen == len) {
+                    return true;
+                }
+                foundShipLen = 0; //reset foundShipLen
+                
+                // check vertical ships
+                for (int i = 0; i < len; i++) {
+                    if (board[row+i][col] == "b") {
+                        foundShipLen++;
+                    }
+                }
+                if (foundShipLen == len) {
+                    return true;
+                }
+                foundShipLen = 0;
+            }
+        }
+        return false;
+    }
+    
+    public int shoot(int row, int col) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if ((i != row) || (j != col)) {
+                    continue;
+                }
+                if (board[row][col] == "b") {
+                    board[row][col] = "x";
+                    return 1;
+                } else if (board[row][col] == "-") {
+                    board[row][col] = "m";
+                    return 0;
+                } else {
+                    return 2;
+                }
+            }
+        }
+        return 2;
+    }
 
 }

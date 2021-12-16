@@ -14,6 +14,7 @@ public class Main {
         Board bs = new Board();
         Boolean shipAdded = bs.addShip(0, 0, 2, true);
         shipAdded = bs.addShip(9, 9, 2, true);
+        bs.shoot(0, 0);
         System.out.print(bs);
     }
 }
